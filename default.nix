@@ -12,8 +12,13 @@ let
       sha256 = nixpkgsVersion.tarballHash;
     };
 
+  overlays =
+    [
+      (import overlays/haskell-packages.nix)
+    ];
+
   pkgs =
-    import pinnedPkgs {};
+    import pinnedPkgs { inherit overlays; };
 
   static-haskell-nix =
     fetchTarball https://github.com/nh2/static-haskell-nix/archive/d1b20f35ec7d3761e59bd323bbe0cca23b3dfc82.tar.gz;
