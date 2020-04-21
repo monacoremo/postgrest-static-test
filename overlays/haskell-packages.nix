@@ -1,15 +1,18 @@
 { compiler }:
-let
-  unbreak =
-    drv:
-      ...;
-in
+
 self: super:
 {
   haskellPackages =
     super.haskell.packages."${compiler}".override {
       overrides =
-        with self.haskell.lib;
+        let
+          unbreak =
+            drv:
+              self.haskell.lib.overrideCabal drv (drv: { broken = false; });
+
+          dontCheck =
+            self.haskell.lib.dontCheck;
+        in
         newPkgs: oldPkgs: rec {
           hasql-pool = dontCheck (unbreak oldPkgs.hasql-pool);
           configurator-pg = dontCheck (unbreak oldPkgs.configurator-pg);
