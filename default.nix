@@ -18,7 +18,7 @@ let
       };
 in
 { compiler ? "ghc865" # Goal: "ghc883"
-, integer-simple ? false # Goal: true
+, integer-simple ? true
 , defaultCabalPackageVersionComingWithGhc ? {
     ghc865 = "Cabal_2_4_1_0";
     ghc883 = "Cabal_3_2_0_0";
