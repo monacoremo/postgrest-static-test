@@ -2,7 +2,7 @@
 
 * [x] Build dynamic executable from Hackage based on static-haskell-nix nixpkgs
   (run `nix-build -A dynamic`)
-* [ ] Build static executable based on static-haskell-nix defaults
+* [x] Build static executable based on static-haskell-nix defaults
   (recommended: `cachix use static-haskell-nix`; run `nix-build -A static`)
 * [ ] Use integer-simple
 * [ ] Switch to a newer pinned nixpkgs version

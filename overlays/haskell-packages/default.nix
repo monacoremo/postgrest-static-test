@@ -12,7 +12,7 @@ let
       lib.overrideCabal drv (drv: { broken = false; });
 
   overrides =
-    new: prev:
+    final: prev:
       {
         hasql-pool = lib.dontCheck (unbreak prev.hasql-pool);
         configurator-pg = prev.callPackage ./configurator-pg.nix {};

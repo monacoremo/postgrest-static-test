@@ -1,11 +1,11 @@
 let
   static-haskell-nix =
     let
-      rev = "acaffd5fb807aa78f106eb3b4a99b05d3a1ec043";
+      rev = "bb4c1e27e391eff01591fe60830ff68a9ada41ef";
     in
       builtins.fetchTarball {
-        url = "https://github.com/nh2/static-haskell-nix/archive/${rev}.tar.gz";
-        sha256 = "1k2931w5x05yczvqkhjqd9ipgkk777215i0cjgqzkjqdzjzi08l1";
+        url = "https://github.com/monacoremo/static-haskell-nix/archive/${rev}.tar.gz";
+        sha256 = "15zyaii6c5pangyzz69qksg6sc6d5qzbcqxxwz0bm6gb5igpwhym";
       };
 
   pinnedPkgs =
