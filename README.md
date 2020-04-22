@@ -2,6 +2,7 @@
 
 * [x] Build dynamic executable based on static-haskell-nix nixpkgs
 * [ ] Build static executable based on static-haskell-nix defaults
+  (recommended: use `cachix use static-haskell-nix`)
 * [ ] Use integer-simple
 * [ ] Switch to a newer pinned nixpkgs version
 * [ ] Use a newer compiler, ghc883
