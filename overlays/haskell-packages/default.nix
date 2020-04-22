@@ -20,8 +20,12 @@ let
         swagger2 = prev.callPackage ./swagger2.nix {};
         insert-ordered-containers = prev.callPackage ./insert-ordered-containers.nix {};
 
-        # Tests take forever to run on static builds.
+        # The tests for the packages below took a long time on static builds,
+        # so I cancelled and skipped them for now - to be investigated.
         happy = lib.dontCheck prev.happy;
+        data-dword = lib.dontCheck prev.data-dword;
+        text-short = lib.dontCheck prev.text-short;
+        jose = lib.dontCheck prev.jose;
       };
 in
 {
