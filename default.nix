@@ -23,7 +23,7 @@ in
     ghc865 = "Cabal_2_4_1_0";
     ghc883 = "Cabal_3_2_0_0";
   }."${compiler}"
-, pkgsSource ? "static-haskell-nix" # Goal: "pinned"
+, pkgsSource ? "pinned"
 , pkgs ? {
     static-haskell-nix = import "${static-haskell-nix}/nixpkgs.nix";
     pinned = import pinnedPkgs {};
