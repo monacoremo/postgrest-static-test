@@ -1,9 +1,11 @@
 # Goal: Build a static PostgREST 7.0.0 executable
 
-* [x] Build dynamic executable based on static-haskell-nix nixpkgs
+* [x] Build dynamic executable from Hackage based on static-haskell-nix nixpkgs
+  (run `nix-build -A dynamic`)
 * [ ] Build static executable based on static-haskell-nix defaults
-  (recommended: use `cachix use static-haskell-nix`)
+  (recommended: `cachix use static-haskell-nix`; run `nix-build -A static`)
 * [ ] Use integer-simple
 * [ ] Switch to a newer pinned nixpkgs version
 * [ ] Use a newer compiler, ghc883
-* [ ] Use callCabal2nix in the PostgREST respository
+* [ ] Replace the Hackage version with using callCabal2nix in the PostgREST
+  respository

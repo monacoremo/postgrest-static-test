@@ -4,49 +4,46 @@
 
 self: super:
 let
+  lib =
+    self.haskell.lib;
+
   unbreak =
     drv:
-      self.haskell.lib.overrideCabal drv (drv: { broken = false; });
-
-  dontCheck =
-    self.haskell.lib.dontCheck;
+      lib.overrideCabal drv (drv: { broken = false; });
 
   overrides =
     new: prev:
       {
-        hasql-pool = dontCheck (unbreak prev.hasql-pool);
+        hasql-pool = lib.dontCheck (unbreak prev.hasql-pool);
         configurator-pg = prev.callPackage ./configurator-pg.nix {};
-        postgrest = dontCheck (prev.callPackage ./postgrest.nix {});
+        postgrest = lib.dontCheck (prev.callPackage ./postgrest.nix {});
         swagger2 = prev.callPackage ./swagger2.nix {};
         insert-ordered-containers = prev.callPackage ./insert-ordered-containers.nix {};
+
+        # Tests take forever to run on static builds.
+        happy = lib.dontCheck prev.happy;
       };
 in
-if integer-simple
-then
-  # Need to override pkgs.haskell.packages.integer-simple."${compiler}"
-  {
-    haskell =
-      super.haskell // {
-        packages =
-          super.haskell.packages // {
-            integer-simple =
-              super.haskell.packages.integer-simple // {
-                "${compiler}" =
-                  super.haskell.packages.integer-simple."${compiler}".override
-                    { inherit overrides; };
-              };
-          };
-      };
-  }
-  else
-  # Need to override pkgs.haskell.packages."${compiler}"
-  {
-    haskell =
-      super.haskell // {
-        packages =
-          super.haskell.packages // {
-            "${compiler}" = super.haskell.packages."${compiler}".override
-              { inherit overrides; };
-          };
-      };
-  }
+{
+  haskell =
+    super.haskell // {
+      packages =
+        super.haskell.packages // (
+          if integer-simple
+          then
+            {
+              integer-simple =
+                super.haskell.packages.integer-simple // {
+                  "${compiler}" =
+                    super.haskell.packages.integer-simple."${compiler}".override
+                      { inherit overrides; };
+                };
+            }
+          else
+            {
+              "${compiler}" = super.haskell.packages."${compiler}".override
+                { inherit overrides; };
+            }
+        );
+    };
+}
