@@ -1,4 +1,7 @@
 let
+  compiler = "ghc865"; # Goal: "ghc883"
+  integer-simple = false; # Goal: true
+
   #nixpkgsVersion =
   #  {
   #    date = "2020-04-19";
@@ -14,12 +17,12 @@ let
 
   pkgs =
     import "${static-haskell-nix}/nixpkgs.nix";
-    #import pinnedPkgs {};
+  #import pinnedPkgs {};
 
   normalPkgs =
     pkgs.appendOverlays
       [
-        (import overlays/haskell-packages)
+        (import overlays/haskell-packages { inherit compiler integer-simple; })
       ];
 
   static-haskell-nix =
@@ -28,13 +31,11 @@ let
   survey =
     import "${static-haskell-nix}/survey"
       {
-        inherit normalPkgs;
-        #compiler = "ghc883";
+        inherit normalPkgs compiler integer-simple;
         #defaultCabalPackageVersionComingWithGhc = "Cabal_3_2_0_0";
-        #integer-simple = true;
       };
 in
 {
-  dynamic = normalPkgs.haskellPackages.postgrest;
+  dynamic = normalPkgs.haskell.packages."${compiler}".postgrest;
   static = survey.haskellPackages.postgrest;
 }

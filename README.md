@@ -5,3 +5,4 @@
 * [ ] Use integer-simple
 * [ ] Switch to a newer pinned nixpkgs version
 * [ ] Use a newer compiler, ghc883
+* [ ] Use callCabal2nix in the PostgREST respository
