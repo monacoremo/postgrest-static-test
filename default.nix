@@ -17,7 +17,7 @@ let
         sha256 = "011f36kr3c1ria7rag7px26bh73d1b0xpqadd149bysf4hg17rln";
       };
 in
-{ compiler ? "ghc865" # Goal: "ghc883"
+{ compiler ? "ghc883"
 , integer-simple ? true
 , defaultCabalPackageVersionComingWithGhc ? {
     ghc865 = "Cabal_2_4_1_0";
